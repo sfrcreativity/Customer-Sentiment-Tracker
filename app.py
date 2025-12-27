@@ -2,17 +2,20 @@ import os
 import pickle
 import streamlit as st
 
-model_path = 'sentiment_model.pkl'
-vectorizer_path = 'tfidf_vectorizer.pkl'
+st.title("Customer Sentiment Tracker (Live Dashboard)")
 
-if os.path.exists(model_path) and os.path.exists(vectorizer_path):
-    model = pickle.load(open(model_path, 'rb'))
-    vectorizer = pickle.load(open(vectorizer_path, 'rb'))
-else:
-    st.error("Model or vectorizer file not found. Please check the path!")
+# Paths
+MODEL_PATH = os.path.join(os.path.dirname(__file__), 'sentiment_model.pkl')
+VECTORIZER_PATH = os.path.join(os.path.dirname(__file__), 'tfidf_vectorizer.pkl')
 
-
-st.title("Customer Sentiment Tracker (Live)")
+# Load and cache model & vectorizer
+@st.cache_data(show_spinner=True)
+def load_model(model_path, vectorizer_path):
+    with open(model_path, 'rb') as f:
+        model = pickle.load(f)
+    with open(vectorizer_path, 'rb') as f:
+        vectorizer = pickle.load(f)
+    return model, vectorizer
 
 # Input box
 review = st.text_area("Type your review here:", height=150)
