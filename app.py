@@ -120,7 +120,7 @@ if len(st.session_state.history) > 1:
 if st.button("♻️ Reset"):
     st.session_state.history = []
     st.rerun()
-
+    
 # ---------------- FOOTER ----------------
 st.markdown("---")
 st.caption("Built with ❤️ using Streamlit, TF-IDF & Machine Learning")
