@@ -1,10 +1,16 @@
-import streamlit as st
+import os
 import pickle
-import numpy as np
+import streamlit as st
 
-# Load model and vectorizer
-model = pickle.load(open('sentiment_model.pkl', 'rb'))
-vectorizer = pickle.load(open('tfidf_vectorizer.pkl', 'rb'))
+model_path = 'sentiment_model.pkl'
+vectorizer_path = 'tfidf_vectorizer.pkl'
+
+if os.path.exists(model_path) and os.path.exists(vectorizer_path):
+    model = pickle.load(open(model_path, 'rb'))
+    vectorizer = pickle.load(open(vectorizer_path, 'rb'))
+else:
+    st.error("Model or vectorizer file not found. Please check the path!")
+
 
 st.title("Customer Sentiment Tracker (Live)")
 
