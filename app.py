@@ -24,6 +24,7 @@ model, vectorizer = load_model(MODEL_PATH, VECTORIZER_PATH)
 
 # Stop if model failed to load
 if model is None or vectorizer is None:
+    st.error("Model or vectorizer file not found. Please upload them to the repo.")
     st.stop()
 
 # Text input
