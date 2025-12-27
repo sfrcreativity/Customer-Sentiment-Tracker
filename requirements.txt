@@ -1,4 +1,6 @@
 streamlit
-numpy
-pickle
 scikit-learn
+joblib
+pandas
+matplotlib
+wordcloud
